@@ -1,20 +1,12 @@
-# Load necessary packages
-if (!require(caret)) {
-  install.packages("caret")
-  library(caret)
-}
-
-if (!require(nnet)) {
-  install.packages("nnet")
-  library(nnet)
-}
+library(caret)
+library(nnet)
 
 data("iris")
 set.seed(123)
 # Split data (80% train, 20% test)
 splitIndex <- createDataPartition(iris$Species, p = 0.8, list = FALSE)
-train_data <- iris[splitIndex, ]
-test_data <- iris[-splitIndex, ]
+train_data <- iris[splitIndex,]
+test_data <- iris[-splitIndex,]
 
 # Train a multinomial logistic regression model and predict
 model <- train(Species ~ Petal.Width + Petal.Length, data = train_data, method = "multinom")
